@@ -1,0 +1,29 @@
+{
+  "name": "Academic_Application_Dev_Project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "dependencies": {
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "mongodb": "^3.6.9",
+    "nodemon": "^2.0.7"
+  },
+  "devDependencies": {},
+  "scripts": { 
+    "watch": "nodemon server",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TahirHSTU/Academic_Application_Dev_Project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TahirHSTU/Academic_Application_Dev_Project/issues"
+  },
+  "homepage": "https://github.com/TahirHSTU/Academic_Application_Dev_Project#readme"
+}
