@@ -1,6 +1,7 @@
 let express = require('express')
 let app = express()
 let nodemailer = require('nodemailer')
+app.use(express.urlencoded({extended: false}))
 
 // mail authentication configuration
 let transporter = nodemailer.createTransport({

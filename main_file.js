@@ -1,4 +1,6 @@
 const {express, app, nodemailer, transporter, datetime, ExactTime} = require('./export_files/dependencies')
+app.use(express.urlencoded({extended: false}))
+
 let mongodb = require('mongodb')
 let db
 let connectionString = 'mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%20Compass&ssl=false'
@@ -8,7 +10,6 @@ mongodb.connect(connectionString, {useNewUrlParser: true}, function(err, client)
     app.listen(3000)
 })
 
-app.use(express.urlencoded({extended: false}))
 
 
 
@@ -212,5 +213,3 @@ app.get('/students', function(req, res){
         
     })
 })
-
-module.exports = {transporter, ExactTime}

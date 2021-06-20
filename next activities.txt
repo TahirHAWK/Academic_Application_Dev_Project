@@ -1,0 +1,4 @@
+ 1. organize big functions from main_file into separate files using module.exports
+  // must commit after this task then proceed on experimenting next one.
+  
+ 2. try and configure email and db in other non-repeatable files. 
