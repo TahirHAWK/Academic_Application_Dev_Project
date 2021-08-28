@@ -1,14 +1,13 @@
-const  {express, app, nodemailer, transporter, datetime, ExactTime, crap} = require('./dependencies') 
-let mongodb = require('mongodb')
-let db
-let connectionString = 'mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%20Compass&ssl=false'
+let  {express, app, nodemailer, mongodb, connectionString, transporter, datetime, ExactTime} = require('./dependencies')
+const {databaseConnect} = require('../db')
 
-mongodb.connect(connectionString, {useNewUrlParser: true}, function(err, client){
-    db = client.db()
-   
-})
+// this line tells express to automatically take asynchronous request data and add it to req object
+
+app.use(express.json())
+// this line tells express to automatically take submitted form data and add it to request object
 app.use(express.urlencoded({extended: false}))
-// dependencies that are needed to access database.
+app.use(express.static('public'))
+// dependencies that are needed to run the codes below
 
 
 
