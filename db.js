@@ -1,4 +1,4 @@
-let {express, app, nodemailer, mongodb, connectionString, transporter, datetime, ExactTime} = require('./export_files/dependencies')
+let {express, app, nodemailer, mongodb, connectionString, transporter} = require('./export_files/dependencies')
 
 
 let databaseConnect = mongodb.connect(connectionString, {useNewUrlParser: true}, function(err, client){

@@ -1,4 +1,4 @@
-let {express, app, nodemailer, mongodb, connectionString, transporter, datetime, ExactTime} = require('./export_files/dependencies')
+let {express, app, nodemailer, mongodb, connectionString, transporter} = require('./export_files/dependencies')
 
 const {databaseConnect} = require('./db')
 // this line tells express to automatically take asynchronous request data and add it to req object

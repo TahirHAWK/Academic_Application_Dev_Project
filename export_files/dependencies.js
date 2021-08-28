@@ -25,9 +25,6 @@ let transporter = nodemailer.createTransport({
     }
   });
 
-  // time related configuration and function
-var datetime = new Date();
-let ExactTime = datetime.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
-// Time config ends here.
 
-module.exports = {express, app, nodemailer, mongodb, connectionString, transporter, datetime, ExactTime}
+
+module.exports = {express, app, nodemailer, mongodb, connectionString, transporter}
