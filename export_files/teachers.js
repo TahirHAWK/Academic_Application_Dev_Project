@@ -181,15 +181,15 @@ let teachersPage = function(req, res){
     })
 }
  
-let teachersSubmit = function(req, res) {
+let teachersSubmit = async function(req, res) {
 
-
+ 
 
     // data structure inside database
 var datetime = new Date();
-let ExactTime =  datetime.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
+let ExactTime =  await datetime.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
 // date and time formation and code must be included inside the function when it was called, it cannot be exported from another module otherwise it will be a fixed time when the program first compiled everytime a single data inserted.If it is called inside a function then it will record the time when it was called right away, hence the right time that we want to show output.
-        db.collection('vivaSystem').insertOne({
+        await db.collection('vivaSystem').insertOne({
             idNumber: req.body.idnumber,
             Marks: req.body.marks, 
             time: ExactTime},
@@ -200,7 +200,7 @@ let ExactTime =  datetime.toLocaleTimeString([], {hour: '2-digit', minute:'2-dig
     
         // mail notification for students
         // mail body and contents
-        var mailOptions = {
+        var mailOptions =  {
           from: 'tahirtamin20@outlook.com',
           to: `tahirtamin20@gmail.com`,
           subject:  "TimeStamp of students (automated)",
@@ -211,7 +211,7 @@ let ExactTime =  datetime.toLocaleTimeString([], {hour: '2-digit', minute:'2-dig
       
      
         // mail sending codes
-        transporter.sendMail(mailOptions, function(error, info){
+         transporter.sendMail(mailOptions, function(error, info){
           if (error) {
             console.log(error);
           } else {
@@ -222,4 +222,39 @@ let ExactTime =  datetime.toLocaleTimeString([], {hour: '2-digit', minute:'2-dig
     
       }
 
-module.exports = {teachersPage, teachersSubmit}
+let teachersEmail =  function(req, res) {
+  db.collection('vivaSystem').find().sort({"_id": -1}).toArray(function(err, vivaSystem) {
+    // data that are going be sent through mail
+    let datafile = `${vivaSystem.map(function(anyNameAsParameter){
+      return `
+      <tr><td style="padding: 20px 20px 20px 20px; color: blue;">${anyNameAsParameter.idNumber} </td>
+      <td style="padding: 20px 20px 20px 20px;"> ${anyNameAsParameter.Marks}</td>`})}`
+
+      // mail body and contents
+    var mailOptions = {
+      from: 'tahirtamin20@outlook.com',
+      to: `${req.body.email}`,
+      subject:  "Marks of students (automated)",
+      html: `<tr style="border: 10px solid;"><td>ID</td><td>Marks</td></tr> <br>
+      ${datafile} <br>`
+    };
+  
+
+    // mail sending codes
+    transporter.sendMail(mailOptions, function(error, info){
+      if (error) {
+        console.log(error);
+      } else {
+        console.log('Email sent(all marks): ' + info.response);
+      }
+    });
+    res.redirect('/teachers')
+  }
+);}
+
+    
+ 
+  
+
+
+module.exports = {teachersPage, teachersSubmit, teachersEmail}
