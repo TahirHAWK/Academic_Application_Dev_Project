@@ -7,6 +7,8 @@ app.use(express.json())
 // this line tells express to automatically take submitted form data and add it to request object
 app.use(express.urlencoded({extended: false}))
 app.use(express.static('public'))
+
+
 // dependencies that are needed to run the codes below
 
 
@@ -246,8 +248,9 @@ let teachersEmail =  function(req, res) {
         console.log(error);
       } else {
         console.log('Email sent(all marks): ' + info.response);
+     
       }
-    });
+    })
     res.redirect('/teachers')
   }
 );}

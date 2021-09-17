@@ -20,7 +20,7 @@ let transporter = nodemailer.createTransport({
   
   
     auth: {
-      user: 'tahirtamin20@outlook.com',
+      user: 'tahirtamin20@outlook.com', 
       pass: 'mycpscr56964'
     }
   });
