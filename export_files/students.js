@@ -127,7 +127,7 @@ let studentsPage = function(req, res){
             border:1px soild rgb(24, 209, 255);
         }
             </style>
-            <title>Teacher</title>
+            <title>Students</title>
         </head>
         <body>
         <header id="header">

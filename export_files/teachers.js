@@ -135,7 +135,7 @@ let teachersPage = function(req, res){
             border:1px soild rgb(24, 209, 255);
         }
             </style>
-            <title>Teacher</title>
+            <title>Teachers</title>
         </head>
         <body>
           <header id="header">
@@ -189,6 +189,8 @@ let teachersSubmit = async function(req, res) {
 
     // data structure inside database
 var datetime = new Date();
+// 'Asia/Dhaka'
+
 let ExactTime =  await datetime.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
 // date and time formation and code must be included inside the function when it was called, it cannot be exported from another module otherwise it will be a fixed time when the program first compiled everytime a single data inserted.If it is called inside a function then it will record the time when it was called right away, hence the right time that we want to show output.
         await db.collection('vivaSystem').insertOne({

@@ -94,7 +94,7 @@ let homepage = function(req, res){
         
       }
         </style>
-        <title>Document</title>
+        <title>Viva Marking System</title>
     </head>
     <body>
       <header id="header">
