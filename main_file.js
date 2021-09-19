@@ -15,7 +15,7 @@ app.use(express.static('public'))
 
 
 const {homepage} = require('./export_files/homepage')
-const {teachersPage, teachersSubmit, teachersEmail, deleteStudent, editStudent} = require('./export_files/teachers')
+const {teachersPage, teachersSubmit, teachersEmail, deleteStudent, editStudent, passwordProtection} = require('./export_files/teachers')
 const {studentsPage} = require('./export_files/students')
 // dependencies and other include files and configurations ends here
 
@@ -30,7 +30,7 @@ app.post('/teachers-submit', teachersSubmit)
 app.post('/teachers-email', teachersEmail)
 app.post('/delete-student', deleteStudent)
 app.post('/edit-student', editStudent)
-app.get('/teachers', teachersPage)
+app.get('/teachers', passwordProtection, teachersPage)
 // teachers section ends here
 
 

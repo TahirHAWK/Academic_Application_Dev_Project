@@ -170,9 +170,20 @@ let editStudent = function(req, res){
   })
 }
 
+let passwordProtection = function(req, res, next){
+  res.set('WWW-Authenticate', 'Basic realm="Viva Marking System"')
+  console.log(req.headers.authorization)
+  if(req.headers.authorization == "Basic dGVzdDp0ZXN0"){
+    next()
+  } else {
+    res.status(401).send(`Authentication required <br> <a href="/">Go to Home</a>`)
+  }
+  
+}
+
     
  
   
 
 
-module.exports = {teachersPage, teachersSubmit, teachersEmail, deleteStudent, editStudent}
+module.exports = {teachersPage, teachersSubmit, teachersEmail, deleteStudent, editStudent, passwordProtection}
