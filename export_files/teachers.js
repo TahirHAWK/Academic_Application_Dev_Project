@@ -18,67 +18,17 @@ app.use(express.static('public'))
 
 let teachersPage = function(req, res){
     db.collection('vivaSystem').find().sort({"_id": -1}).toArray(function(err, vivaSystem) {
-        
-        res.send(`<html lang="en">
-        <head>
-            <meta charset="UTF-8">
-            <meta http-equiv="X-UA-Compatible" content="IE=edge">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <link rel="stylesheet" href="teachers.css">
-            
-            <title>Teachers</title>
-        </head>
-        <body>
-          <header id="header">
-            <nav id="nav-bar">
-            <li><img id="header-img" src="https://hstu.ac.bd/img/hstu_correct_logo.png" alt="hstu logo" class="logo"></li>
-            <li><a class="nav-link" href="/">Home</a></li>
-            <li><a class="nav-link" href="/teachers">Teachers</a></li>
-            <li><a class="nav-link" href="/students">Students</a></li>
-              
-            </nav>
-          </header>
-        
-              <div class="subHeader">
-                <form id="form" action="/teachers-submit" method="POST">
-                <input name="idnumber" type="number" placeholder="IDNumber" >
-                    <input name="marks" type="number" placeholder="Marks" >
-                    <input type="submit">
-                </form>
-                <form id="form" action="/teachers-email" method="POST">
-                <input name="email" type="email" placeholder="Email" >
-                    
-                <input type="submit" value="Send">
-                </form>
-                    
-              </div>
-        
-              <div class="submittedList">
-                  <table>
-                      
-                      <tr><th>ID Number</th><th>Marks</th></tr> 
-
-                      ${vivaSystem.map(function(anyNameAsParameter){
-                          return `
-                          <tr>
-                          <td>${anyNameAsParameter.idNumber}</td><td>${anyNameAsParameter.Marks}</td> 
-                          <td>
-                          <button data-id="${anyNameAsParameter._id}"  class="edit">Edit</button></td>
-                          <td><button data-id="${anyNameAsParameter._id}"  class="delete">Delete</button></td>
-                          </tr>`
-                       
-                      }).join('')}
-
-                   
-                    
-        
-                </table>
-              </div>
-              <script type="text/javascript" src="https://unpkg.com/axios@0.21.4/dist/axios.min.js"></script>
-              <script  src="browser_file_teachers.js"></script>
-
-        </body>
-        </html>`)  
+      if (err) {
+        console.log(err);
+      } else if (vivaSystem.length) {
+       console.log('Found:');
+        mk = vivaSystem;
+        res.render('teachers', {vivaSystem: vivaSystem})
+        console.log('mk = ', mk);
+      } else {
+        console.log('No document(s) found with defined "find" criteria!');
+      }
+          
     })
 }
  
