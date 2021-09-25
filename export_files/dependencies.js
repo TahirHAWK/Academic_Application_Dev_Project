@@ -1,6 +1,8 @@
 let express = require('express')
 let app = express()
 let nodemailer = require('nodemailer')
+let mongoose = require('mongoose')
+let ejs = require('ejs')
 
 let mongodb = require('mongodb')
 let db
@@ -33,4 +35,4 @@ let transporter = nodemailer.createTransport({
 
 
 
-module.exports = {express, app, nodemailer, mongodb, connectionString, transporter}
+module.exports = {express, app, nodemailer, mongoose, ejs, mongodb, connectionString, transporter}

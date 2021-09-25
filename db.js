@@ -1,4 +1,4 @@
-let {express, app, nodemailer, mongodb, connectionString, transporter} = require('./export_files/dependencies')
+let {express, app, nodemailer, mongoose, ejs, mongodb, connectionString, transporter} = require('./export_files/dependencies')
 
 
 
