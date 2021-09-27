@@ -10,7 +10,7 @@ let studentsPage = function(req, res){
           } else if (vivaSystem.length) {
            console.log('Found:');
             mk = vivaSystem;
-            res.render('students', {vivaSystem: vivaSystem})
+            res.render('students', {title: 'Students', cssfile: 'students',vivaSystem: vivaSystem})
             console.log('mk = ', mk);
           } else {
             console.log('No document(s) found with defined "find" criteria!');

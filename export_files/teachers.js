@@ -23,7 +23,7 @@ let teachersPage = function(req, res){
       } else if (vivaSystem.length) {
        console.log('Found:');
         mk = vivaSystem;
-        res.render('teachers', {vivaSystem: vivaSystem})
+        res.render('teachers', {title: 'Teachers', cssfile: 'teachers', vivaSystem: vivaSystem})
         console.log('mk = ', mk);
       } else {
         console.log('No document(s) found with defined "find" criteria!');
