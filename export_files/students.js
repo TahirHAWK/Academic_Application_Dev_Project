@@ -1,7 +1,3 @@
-let  {express, app, nodemailer, mongoose, ejs, mongodb, connectionString, transporter} = require('./dependencies')
-const {databaseConnect} = require('../db');
-const { response } = require('express');
-
 
 let studentsPage = function(req, res){
     db.collection('vivaSystem').find().sort({"_id": -1}).toArray(function(err, vivaSystem){
@@ -12,7 +8,7 @@ let studentsPage = function(req, res){
             mk = vivaSystem;
             res.render('students', {title: 'Students', cssfile: 'students',vivaSystem: vivaSystem})
             console.log('mk = ', mk);
-          } else {
+          } else { 
             console.log('No document(s) found with defined "find" criteria!');
           }
     })

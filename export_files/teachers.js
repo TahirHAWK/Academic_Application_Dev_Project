@@ -1,4 +1,4 @@
-let  {express, app, nodemailer, mongoose, ejs, mongodb, connectionString, transporter} = require('./dependencies')
+let  {express, app, nodemailer, mongoose, ejs, mongodb, connectionString, transporter, MailOptions} = require('./dependencies')
 const {databaseConnect} = require('../db')
 
 // this line tells express to automatically take asynchronous request data and add it to req object
@@ -14,17 +14,18 @@ app.use(express.static('public'))
 
 
 // another files that are exported
-
+let error =[];
 
 let teachersPage = function(req, res){
     db.collection('vivaSystem').find().sort({"_id": -1}).toArray(function(err, vivaSystem) {
       if (err) {
         console.log(err);
+        error.push(err)
       } else if (vivaSystem.length) {
        console.log('Found:');
         mk = vivaSystem;
-        res.render('teachers', {title: 'Teachers', cssfile: 'teachers', vivaSystem: vivaSystem})
-        console.log('mk = ', mk);
+        res.render('teachers', {title: 'Teachers', cssfile: 'teachers', vivaSystem: vivaSystem, error: error})
+        // console.log('mk = ', mk);
       } else {
         console.log('No document(s) found with defined "find" criteria!');
       }
@@ -50,22 +51,18 @@ let ExactTime =  await datetime.toLocaleTimeString([], {hour: '2-digit', minute:
     
         // mail notification for students
         // mail body and contents
-        var mailOptions =  {
-          from: 'tahirtamin20@outlook.com',
-          to: `tahirtamin20@gmail.com`,
-          subject:  "TimeStamp of students (automated)",
-          html: `<tr style="border: 10px solid;"><td>ID</td><td>TimeStamp</td></tr> <br>
-          
-          <tr><td>${req.body.idnumber}</td>${ExactTime}<td></td></tr> <br>`
-        };
+        let mailhtmlParameter = `<tr><td>${req.body.idnumber}</td>${ExactTime}<td></td></tr> <br>`
+
+            let mailoptions = new MailOptions('tahirtamin20@gmail.com', 'singleTime', mailhtmlParameter)
       
      
         // mail sending codes
-         transporter.sendMail(mailOptions, function(error, info){
+         transporter.sendMail(mailoptions, function(error, info){
           if (error) {
             console.log(error);
           } else {
             console.log('Email sent: ' + info.response);
+
           }
         });
     
@@ -75,31 +72,28 @@ let ExactTime =  await datetime.toLocaleTimeString([], {hour: '2-digit', minute:
 let teachersEmail =  function(req, res) {
   db.collection('vivaSystem').find().sort({"_id": -1}).toArray(function(err, vivaSystem) {
     // data that are going be sent through mail
-    let datafile = `${vivaSystem.map(function(anyNameAsParameter){
-      return `
-      <tr><td style="padding: 20px 20px 20px 20px; color: blue;">${anyNameAsParameter.idNumber} </td>
-      <td style="padding: 20px 20px 20px 20px;"> ${anyNameAsParameter.Marks}</td>`})}`
+    let datafile = vivaSystem.map(function(data){
+      return `<tr><td style="padding: 20px 20px 20px 20px; color: blue;">${data.idNumber} </td>
+      <td style="padding: 20px 20px 20px 20px;"> ${data.Marks}</td>`
+    })
+    console.log(datafile)
 
-      // mail body and contents
-    var mailOptions = {
-      from: 'tahirtamin20@outlook.com',
-      to: `${req.body.email}`,
-      subject:  "Marks of students (automated)",
-      html: `<tr style="border: 10px solid;"><td>ID</td><td>Marks</td></tr> <br>
-      ${datafile} <br>`
-    };
-  
+    // mail body and contents
+    let mailoptions = new MailOptions(req.body.email, 'allMark', datafile)  
 
     // mail sending codes
-    transporter.sendMail(mailOptions, function(error, info){
-      if (error) {
-        console.log(error);
+    transporter.sendMail(mailoptions, function(err, info){
+      if (err) {
+        console.log(err);
+        error.push(err)
+        res.render('teachers', {title: 'Teachers', cssfile: 'teachers', vivaSystem: vivaSystem, error: error})
       } else {
         console.log('Email sent(all marks): ' + info.response);
+        res.render('teachers', {title: 'Teachers', cssfile: 'teachers', vivaSystem: vivaSystem, error: error})
      
       }
     })
-    res.redirect('/teachers')
+    // res.redirect('/teachers')
   }
 );}
 

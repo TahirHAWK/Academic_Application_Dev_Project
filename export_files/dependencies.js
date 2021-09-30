@@ -29,10 +29,32 @@ let transporter = nodemailer.createTransport({
   
     auth: {
       user: 'tahirtamin20@outlook.com', 
-      pass: 'mycpscr56964'
+      pass: 'alhamdulillah56964'
     }
   });
+// declaring constructor for mailoptions
+  let MailOptions = function(recipientEmail, subject, mailhtmlParameter) {
+    this.from = 'tahirtamin20@outlook.com'
+    this.to = recipientEmail
+    if(subject == 'allMark'){
+      this.subject= 'All Marks of students (automated)'
+    } else if(subject == 'singleTime'){
+      this.subject = 'TimeStamp of students (automated)'
+    } else {
+        this.subject = subject
+    }
+    
+    
+    if(subject == 'allMark'){
+      this.html = `<tr style="border: 10px solid;"><td>ID</td><td>Marks</td></tr> <br>
+      ${mailhtmlParameter} <br>`
+    } else if(subject == 'singleTime'){
+      this.html = `<tr style="border: 10px solid;"><td>ID</td><td>TimeStamp</td></tr> <br>
+        
+      ${mailhtmlParameter}`
+    }
+    }
+  
 
 
-
-module.exports = {express, app, nodemailer, mongoose, ejs, mongodb, connectionString, transporter}
+module.exports = {express, app, nodemailer, mongoose, ejs, mongodb, connectionString, transporter, MailOptions}

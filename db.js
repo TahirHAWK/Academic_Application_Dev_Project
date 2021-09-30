@@ -1,4 +1,4 @@
-let {express, app, nodemailer, mongoose, ejs, mongodb, connectionString, transporter} = require('./export_files/dependencies')
+let dependencies = require('./export_files/dependencies')
 
 
 
@@ -7,10 +7,10 @@ if(port == null || port == ""){
   port = 3000
 }
 
-let databaseConnect = mongodb.connect(connectionString, {useNewUrlParser: true}, function(err, client){
+let databaseConnect = dependencies.mongodb.connect(dependencies.connectionString, {useNewUrlParser: true}, function(err, client){
     
   db = client.db() 
-  app.listen(port)
+  dependencies.app.listen(port)
 }) 
 
 module.exports = {databaseConnect}
