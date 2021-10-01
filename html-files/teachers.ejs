@@ -16,17 +16,17 @@
                 </form>
                     
               </div>
-              <% if (!error){%> 
+              <% if (error == 'success'){%> 
               <div class="alert2">
                 <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
                 <strong>Congrats,</strong> The mail has been sent successfully.
                 <br>
                 </div> 
                 
-              <%} else if (error.length){%> 
+              <%} else if (error && error != ''){%> 
               <div class="alert">
                 <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-                <strong>Error,</strong> The mail cannot be sent, please check your internet connection or contact your developer.
+                <strong>Error:</strong> The mail cannot be sent, please check your internet connection or contact your developer.
                 <br>
                 </div> 
                 <% } %>

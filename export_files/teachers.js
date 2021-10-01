@@ -14,18 +14,17 @@ app.use(express.static('public'))
 
 
 // another files that are exported
-let error =[];
+
 
 let teachersPage = function(req, res){
     db.collection('vivaSystem').find().sort({"_id": -1}).toArray(function(err, vivaSystem) {
       if (err) {
         console.log(err);
-        error.push(err)
       } else if (vivaSystem.length) {
        console.log('Found:');
         mk = vivaSystem;
-        res.render('teachers', {title: 'Teachers', cssfile: 'teachers', vivaSystem: vivaSystem, error: error})
-        // console.log('mk = ', mk);
+        res.render('teachers', {title: 'Teachers', cssfile: 'teachers', vivaSystem: vivaSystem, error: ''})
+        
       } else {
         console.log('No document(s) found with defined "find" criteria!');
       }
@@ -64,9 +63,7 @@ let ExactTime =  await datetime.toLocaleTimeString([], {hour: '2-digit', minute:
             console.log('Email sent: ' + info.response);
 
           }
-        });
-    
-    
+        })    
       }
 
 let teachersEmail =  function(req, res) {
@@ -84,16 +81,15 @@ let teachersEmail =  function(req, res) {
     // mail sending codes
     transporter.sendMail(mailoptions, function(err, info){
       if (err) {
-        console.log(err);
-        error.push(err)
-        res.render('teachers', {title: 'Teachers', cssfile: 'teachers', vivaSystem: vivaSystem, error: error})
+        console.log(err, 'length of error: ' + err.length);  
+        res.render('teachers', {title: 'Teachers', cssfile: 'teachers', vivaSystem: vivaSystem, error: err})
       } else {
         console.log('Email sent(all marks): ' + info.response);
-        res.render('teachers', {title: 'Teachers', cssfile: 'teachers', vivaSystem: vivaSystem, error: error})
+        res.render('teachers', {title: 'Teachers', cssfile: 'teachers', vivaSystem: vivaSystem, error: 'success'})
      
       }
     })
-    // res.redirect('/teachers')
+    
   }
 );}
 

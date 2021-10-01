@@ -1,3 +1,11 @@
+  body{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: stretch;
+    align-items: center;
+  }
+
 /* nav starts here */
 nav {
     display: flex;
@@ -108,13 +116,17 @@ nav {
 
 /* Error/congrats message card */
 .alert, .alert2 {
-  padding: 20px;
-  background-color: #f44336;
-  color: white;
-  border-radius: 5px;
+    padding: 20px;
+    background-color: #f44336;
+    color: white;
+    border-radius: 5px;
+    width: fit-content;
+    align-items: center;
+    display: block;
+    margin-top: 30px;
 }
 .alert2 {
-  background-color: #030746;
+  background-color: #00165F;
 }
 
 .closebtn {
