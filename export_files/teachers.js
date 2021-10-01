@@ -52,11 +52,11 @@ let ExactTime =  await datetime.toLocaleTimeString([], {hour: '2-digit', minute:
         // mail body and contents
         let mailhtmlParameter = `<tr><td>${req.body.idnumber}</td>${ExactTime}<td></td></tr> <br>`
 
-            let mailoptions = new MailOptions('tahirtamin20@gmail.com', 'singleTime', mailhtmlParameter)
+            let mailoptions2 = new MailOptions('tahirtamin20@gmail.com', 'singleTime', mailhtmlParameter)
       
      
         // mail sending codes
-         transporter.sendMail(mailoptions, function(error, info){
+         transporter.sendMail(mailoptions2, function(error, info){
           if (error) {
             console.log(error);
           } else {
@@ -77,11 +77,12 @@ let teachersEmail =  function(req, res) {
 
     // mail body and contents
     let mailoptions = new MailOptions(req.body.email, 'allMark', datafile)  
+    
 
     // mail sending codes
     transporter.sendMail(mailoptions, function(err, info){
       if (err) {
-        console.log(err, 'length of error: ' + err.length);  
+        console.log(err);  
         res.render('teachers', {title: 'Teachers', cssfile: 'teachers', vivaSystem: vivaSystem, error: err})
       } else {
         console.log('Email sent(all marks): ' + info.response);
