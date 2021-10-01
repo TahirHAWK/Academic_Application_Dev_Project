@@ -1,3 +1,11 @@
+body{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: stretch;
+  align-items: center;
+}
+
 /* nav starts here */
 nav {
     display: flex;
@@ -13,10 +21,13 @@ nav {
     
   }
   @media(max-width: 700px) {
+    body{
+      margin-top: 165px;
+    }
     nav{
     flex-direction: column;
     }
-  }
+}
   
   .nav-link {
     color: white;
