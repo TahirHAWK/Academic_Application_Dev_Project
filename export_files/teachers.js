@@ -71,7 +71,8 @@ let teachersEmail =  function(req, res) {
     // data that are going be sent through mail
     let datafile = vivaSystem.map(function(data){
       return `<tr><td style="padding: 20px 20px 20px 20px; color: blue;">${data.idNumber} </td>
-      <td style="padding: 20px 20px 20px 20px;"> ${data.Marks}</td>`
+      <td style="padding: 20px 20px 20px 20px;"> ${data.Marks}</td>
+      <td style="padding: 20px 20px 20px 20px;"> ${data.time}</td>`
     })
     console.log(datafile)
 
@@ -104,9 +105,10 @@ let deleteStudent = function(req, res){
 
 let editStudent = function(req, res){
   let blogID = new mongodb.ObjectID(req.body.id)
-  db.collection('vivaSystem').findOneAndUpdate({_id: blogID}, {$set: {idNumber: req.body.idnumber, Marks: req.body.marks}}, function(){
-    
-    res.send("Success")
+  db.collection('vivaSystem').findOneAndUpdate({_id: blogID}, {$set: {idNumber: req.body.idnumber, Marks: req.body.marks}}, function(err, info){
+    console.log(info)
+    // res.send("success")
+    res.json(info.value)
 
   })
 }

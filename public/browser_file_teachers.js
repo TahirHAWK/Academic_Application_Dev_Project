@@ -22,10 +22,13 @@ let userInput2 = prompt("Enter your corrected Marks:", "Your changed marks"
 )
 
 if(userInput1 && userInput2){
-    axios.post('/edit-student', {idnumber: userInput1, marks: userInput2, time: Date,id: anyName.target.getAttribute("data-id")}).then(function(){
+    axios.post('/edit-student', {idnumber: userInput1, marks: userInput2, time: Date,id: anyName.target.getAttribute("data-id")}).then(function(res){
+        console.log(res.data)
+        alert(res.data.idNumber, window.location.reload()) 
+
+        // you can pass parameter to load window after the alert popup
+
         
-        // reload page after editing data
-        window.location.reload();
         
         
     }).catch(function(){
@@ -34,4 +37,7 @@ if(userInput1 && userInput2){
 }
 
 } 
+
+
+
 }) 

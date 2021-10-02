@@ -4,15 +4,15 @@
           <%- include('./partials/nav.ejs') %>
         
               <div class="subHeader">
-                <form id="form" action="/teachers-submit" method="POST">
+                <form id="form-teacher" action="/teachers-submit" method="POST">
                 <input name="idnumber" type="number" placeholder="IDNumber" >
                     <input name="marks" type="number" placeholder="Marks" >
                     <input type="submit">
                 </form>
-                <form id="form" action="/teachers-email" method="POST">
+                <form id="form-email" action="/teachers-email" method="POST">
                 <input name="email" type="email" placeholder="Email" >
                     
-                <input type="submit" value="Send">
+                <input type="submit" value="Send" class="sendMail">
                 </form>
                     
               </div>
