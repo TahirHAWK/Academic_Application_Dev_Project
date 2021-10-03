@@ -9,27 +9,19 @@
                     <input name="marks" type="number" placeholder="Marks" >
                     <input type="submit">
                 </form>
-                <form id="form-email" action="/teachers-email" method="POST">
-                <input name="email" type="email" placeholder="Email" >
+                <form id="form-email">
+                <input name="email" id="email-field" placeholder="Email" type="email" >
                     
-                <input type="submit" value="Send" class="sendMail">
+                <input type="submit" value="Send" class="sendMail" id="email-button">
                 </form>
                     
               </div>
-              <% if (error == 'success'){%> 
-              <div class="alert2">
-                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-                <strong>Congrats,</strong> The mail has been sent successfully.
-                <br>
-                </div> 
+              
+              <div class="alert2" id="email-alert">
                 
-              <%} else if (error && error != ''){%> 
-              <div class="alert">
-                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-                <strong>Error:</strong> The mail cannot be sent, please check your internet connection or contact your developer.
-                <br>
+                
                 </div> 
-                <% } %>
+              
               <div class="submittedList">
                   <table>
                       

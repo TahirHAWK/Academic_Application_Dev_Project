@@ -119,11 +119,7 @@ nav {
     margin: auto;
 }
 
-@media()
 
-.submittedlist th {
-    border:1px soild rgb(24, 209, 255);
-}
 
 /* Error/congrats message card */
 .alert, .alert2 {

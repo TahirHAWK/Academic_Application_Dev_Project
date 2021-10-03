@@ -84,10 +84,10 @@ let teachersEmail =  function(req, res) {
     transporter.sendMail(mailoptions, function(err, info){
       if (err) {
         console.log(err);  
-        res.render('teachers', {title: 'Teachers', cssfile: 'teachers', vivaSystem: vivaSystem, error: err})
+        res.send(err)
       } else {
         console.log('Email sent(all marks): ' + info.response);
-        res.render('teachers', {title: 'Teachers', cssfile: 'teachers', vivaSystem: vivaSystem, error: 'success'})
+        res.send('success')
      
       }
     })
