@@ -43,8 +43,10 @@ let ExactTime =  await datetime.toLocaleTimeString([], {hour: '2-digit', minute:
             idNumber: req.body.idnumber,
             Marks: req.body.marks, 
             time: ExactTime},
-            function(){
-                res.redirect('/teachers')
+            function(err, info){
+               
+                res.json(info.ops[0])
+                
             }
         )
     

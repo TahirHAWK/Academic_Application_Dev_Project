@@ -4,9 +4,9 @@
           <%- include('./partials/nav.ejs') %>
         
               <div class="subHeader">
-                <form id="form-teacher" action="/teachers-submit" method="POST">
-                <input name="idnumber" type="number" placeholder="IDNumber" >
-                    <input name="marks" type="number" placeholder="Marks" >
+                <form id="form-teacher">
+                <input name="idnumber" type="number" placeholder="IDNumber" id="idnumber">
+                    <input name="marks" type="number" placeholder="Marks" id="marks">
                     <input type="submit">
                 </form>
                 <form id="form-email">
@@ -23,26 +23,23 @@
                 </div> 
               
               <div class="submittedList">
-                  <table>
+                  
+                <table> 
+                  <tr><th>ID Number</th><th>Marks</th></tr> 
+                  <% vivaSystem.forEach(viva => { %>
+                    <tr id="student-data">
                       
-                      <tr><th>ID Number</th><th>Marks</th></tr> 
-
-                      <% vivaSystem.forEach(viva => { %>
-                          <tr>
-                          <td><%= viva.idNumber %></td><td><%= viva.Marks %></td> 
+                      <td><%= viva.idNumber %></td><td><%= viva.Marks %></td> 
                           <td>
                           <button data-id="<%= viva._id %>"  class="edit">Edit</button></td>
                           <td><button data-id="<%= viva._id %>"  class="delete">Delete</button></td>
-                          </tr>`
-                       
-                      <% }) %>
-
-                   
-                    
-        
-                </table>
+                        
+                          </tr>              
+                      <% }) %>  
+                    </table>
               </div>
-              <script type="text/javascript" src="https://unpkg.com/axios@0.21.4/dist/axios.min.js"></script>
+              <!-- <script type="text/javascript" src="/axios.min.js"></script> -->
+              <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
               <script  src="browser_file_teachers.js"></script>
 
         </body>
