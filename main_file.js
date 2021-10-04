@@ -18,7 +18,7 @@ app.set('views', 'html-files')
 
 const {homepage} = require('./export_files/homepage')
 const {teachersPage, teachersSubmit, teachersEmail, deleteStudent, editStudent, passwordProtection} = require('./export_files/teachers')
-const {studentsPage} = require('./export_files/students')
+const {studentsPage, studentsPageData} = require('./export_files/students')
 // dependencies and other include files and configurations ends here
 
 
@@ -38,3 +38,4 @@ app.get('/teachers', passwordProtection, teachersPage)
 
 // student section starts here
 app.get('/students', studentsPage)
+app.post('/students-data', studentsPageData)

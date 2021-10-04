@@ -29,7 +29,7 @@
                   <% vivaSystem.forEach(viva => { %>
                     <tr id="student-data">
                       
-                      <td><%= viva.idNumber %></td><td><%= viva.Marks %></td> 
+                      <td class="idText"><%= viva.idNumber %></td><td class="marksText"><%= viva.Marks %></td> 
                           <td>
                           <button data-id="<%= viva._id %>"  class="edit">Edit</button></td>
                           <td><button data-id="<%= viva._id %>"  class="delete">Delete</button></td>

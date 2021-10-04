@@ -26,6 +26,7 @@ nav {
     }
     nav{
     flex-direction: column;
+    position: absolute;
     }
     .submittedlist td{
       display: flex;

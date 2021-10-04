@@ -1,9 +1,13 @@
+// note: There are some variables here, but in code we cannot use variables everywhere to shorten our code, it may get an error that 'cannot find the parent element', so for this reason, we have to use the full code even if it it's not appropriate.
+
 // email field related elements
 let teacherMail = document.getElementById('form-email')
 
 let emailField = document.getElementById('email-field')
 
 let emailAlert = document.getElementById('email-alert')
+
+let emailButton = document.getElementById("email-button")
 
 // create field related elements
 
@@ -36,12 +40,13 @@ let notificationEmail = function(data){
 // functions for create element
 
 let studentDataTemplate = function(viva){
-    return ` <tr>
-    <td>${viva.idNumber}</td><td>${viva.Marks}</td> 
+    return `
+    <tr id="student-data">                  
+    <td class="idText">${viva.idNumber}</td><td class="marksText">${viva.Marks}</td> 
     <td>
     <button data-id="${viva._id}"  class="edit">Edit</button></td>
     <td><button data-id="${viva._id}"  class="delete">Delete</button></td>
-    </tr> `
+    </tr>   `
 }
 
 
@@ -49,8 +54,8 @@ let studentDataTemplate = function(viva){
 // send email without page reload and get notification
 teacherMail.addEventListener('submit', function(event){
     event.preventDefault()
-    document.getElementById("email-button").value="Sending";
-    document.getElementById("email-button").disabled = true;
+    emailButton.value="Sending";
+    emailButton.disabled = true;
     axios.post('/teachers-email', {email: emailField.value}).then(function(response){
         if(response.data == 'success'){
             emailAlert.className = "alert2";
@@ -60,8 +65,10 @@ teacherMail.addEventListener('submit', function(event){
             emailAlert.className = "alert";
             console.log('mail cannot be sent')
         }
-        document.getElementById("email-button").value="Send";
-        document.getElementById("email-button").disabled = false;
+        emailButton.value="Send";
+        emailButton.disabled = false;
+        emailField.value = ''
+        emailField.focus()
         emailAlert.insertAdjacentHTML('afterbegin', notificationEmail(response.data))
             setTimeout(function(){
                 emailAlert.innerHTML = '';
@@ -74,10 +81,14 @@ teacherMail.addEventListener('submit', function(event){
 
 formTeacherMarks.addEventListener('submit', function(event){
     event.preventDefault()
-    axios.post('/teachers-submit', {idnumber: formIdSubmit.value, marks: formIdMarks.value}).then(function(response){
+    let datetime = new Date()
+    let ExactTime = datetime.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
+    // let datetime = `${datetime.getHours()} : ${datetime.getMinutes()} : ${datetime.getSeconds()}`
+    axios.post('/teachers-submit', {idnumber: formIdSubmit.value, marks: formIdMarks.value, time: ExactTime}).then(function(response){
         console.log(response.data)
         if(response.data){
-            studentData.insertAdjacentHTML('beforebegin', studentDataTemplate(response.data))
+            document.getElementById('student-data').insertAdjacentHTML('beforebegin', studentDataTemplate(response.data))
+            // must use the full code instead of studentData variable, it cannot find the parent
             formIdSubmit.value = ''
             formIdMarks.value = ''
             formIdSubmit.focus()
@@ -99,7 +110,8 @@ document.addEventListener("click", function(anyName){
         if(confirm("Do you really want to delete this item?")){
              axios.post('/delete-student', {id: anyName.target.getAttribute("data-id")}).then(function(){
                 // reload page after editing data
-                window.location.reload();
+                anyName.target.parentElement.parentElement.remove()
+                // window.location.reload();
                 
                 
             }).catch(function(){
@@ -112,22 +124,17 @@ document.addEventListener("click", function(anyName){
 
                 // update Feature
     if(anyName.target.classList.contains("edit")){
+    let typedID = anyName.target.parentElement.parentElement.querySelector('.idText').innerHTML
+    let typedMarks = anyName.target.parentElement.parentElement.querySelector('.marksText').innerHTML
     
-let userInput1 = prompt("Enter your corrected Student ID:", "Your changed ID"
-)
-let userInput2 = prompt("Enter your corrected Marks:", "Your changed marks"
-)
+let userInputID = prompt("Enter your corrected Student ID:", typedID)
+let userInputMarks = prompt("Enter your corrected Marks:", typedMarks)
 
-if(userInput1 && userInput2){
-    axios.post('/edit-student', {idnumber: userInput1, marks: userInput2, time: Date,id: anyName.target.getAttribute("data-id")}).then(function(res){
+if(userInputID && userInputMarks){
+    axios.post('/edit-student', {idnumber: userInputID, marks: userInputMarks, id: anyName.target.getAttribute("data-id")}).then(function(res){
         console.log(res.data)
-        alert(res.data.idNumber, window.location.reload()) 
-
-        // you can pass parameter to load window after the alert popup
-
-        
-        
-        
+        anyName.target.parentElement.parentElement.querySelector('.idText').innerHTML = userInputID
+        anyName.target.parentElement.parentElement.querySelector('.marksText').innerHTML = userInputMarks  
     }).catch(function(){
         alert("please try again later.")
     })
