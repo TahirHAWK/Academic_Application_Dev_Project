@@ -6,12 +6,12 @@ let ejs = require('ejs')
 
 let mongodb = require('mongodb')
 let db
-let connectionString = 'mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%20Compass&ssl=false'
+// let connectionString = 'mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%20Compass&ssl=false'
 // for offline
 // always commit your changes to github after activating the online string and turning off the offline.
 
 
-// let connectionString = 'mongodb+srv://appdev:appdev@appdev.6ppvo.mongodb.net/AppDev?retryWrites=true&w=majority'
+let connectionString = 'mongodb+srv://appdev:appdev@appdev.6ppvo.mongodb.net/AppDev?retryWrites=true&w=majority'
 // for online
 
 
