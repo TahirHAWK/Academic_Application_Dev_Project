@@ -11,8 +11,6 @@ app.use(express.static('public'))
 
 // dependencies that are needed to run the codes below
 
-
-
 // another files that are exported
 
 
@@ -48,7 +46,7 @@ let teachersSubmit = async function(req, res) {
     
         // mail notification for students
         // mail body and contents
-        let mailhtmlParameter = `<tr><td>${req.body.idnumber}</td>${ExactTime}<td></td></tr> <br>`
+        let mailhtmlParameter = `<tr><td>${req.body.idnumber}</td>${req.body.time}<td></td></tr> <br>`
 
             let mailoptions2 = new MailOptions('tahirtamin20@gmail.com', 'singleTime', mailhtmlParameter)
             console.log(mailoptions2)
@@ -76,10 +74,8 @@ let teachersEmail =  function(req, res) {
 
     // mail body and contents
     let mailoptions = new MailOptions(req.body.email, 'allMark', datafile)  
-    
-
     // mail sending codes
-    transporter.sendMail(mailoptions, function(err, info){
+    transporter.sendMail( mailoptions, function(err, info){
       if (err) {
         console.log(err);  
         res.send(err)
@@ -88,8 +84,9 @@ let teachersEmail =  function(req, res) {
         res.send('success')
      
       }
+     
     })
-    
+ 
   }
 );}
 
