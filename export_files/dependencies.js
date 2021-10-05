@@ -17,7 +17,7 @@ let connectionString = 'mongodb+srv://appdev:appdev@appdev.6ppvo.mongodb.net/App
 
 // this line tells express to automatically take asynchronous request data and add it to req object
 
-app.use(express.json())
+app.use(express.json()) 
 // this line tells express to automatically take submitted form data and add it to request object
 app.use(express.urlencoded({extended: false}))
 app.use(express.static('public'))

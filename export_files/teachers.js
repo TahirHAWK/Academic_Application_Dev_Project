@@ -51,7 +51,7 @@ let teachersSubmit = async function(req, res) {
         let mailhtmlParameter = `<tr><td>${req.body.idnumber}</td>${ExactTime}<td></td></tr> <br>`
 
             let mailoptions2 = new MailOptions('tahirtamin20@gmail.com', 'singleTime', mailhtmlParameter)
-      
+            console.log(mailoptions2)
      
         // mail sending codes
          transporter.sendMail(mailoptions2, function(error, info){

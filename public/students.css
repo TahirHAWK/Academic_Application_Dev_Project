@@ -117,3 +117,9 @@ nav {
 .submittedlist th {
     border:1px soild rgb(24, 209, 255);
 }
+
+tr{
+  display: flex;
+  flex-direction: column;
+}
+

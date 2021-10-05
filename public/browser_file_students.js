@@ -4,7 +4,8 @@ let studentDataTime = function(viva){
     <tr id="student-data">                  
     <td class="idText">${viva.idNumber}</td><td class="marksText">${viva.time}</td> 
     <td>
-    </tr>   `
+    </tr> 
+      `
 }
 
 // select the html element where the data is going to be updated
@@ -19,14 +20,16 @@ let requestStudentsPageData = function(){
     axios.post('/students-data', {time: ExactTime}).then(function(response){
         // document. getElementById(“div_name”).innerText +=  “data” ; append method
         let x =0
-        for(x=0; x<=response.data.length; x++){
+        // for(x=0; x<=response.data.length; x++){
 
+        console.log(response.data.map(function(data){
+            return studentDataTime(data)
+        }))
             console.log('response : ', response.data.length)
-            document.getElementById('student-data').innerHTML = studentDataTime(response.data[x])
-        }
+            document.getElementById('student-data').innerHTML = response.data.map(function(data){
+               return studentDataTime(data)
+            }).join(`<br>`)
+        // }
     })
 }
-// setInterval(requestStudentsPageData, 3*1000);
-// select the element again where new data will be
-
-// place the new data
+setInterval(requestStudentsPageData, 3*1000);
