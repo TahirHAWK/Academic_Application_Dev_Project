@@ -24,7 +24,7 @@ let teachersPage = function(req, res){
         res.render('teachers', {title: 'Teachers', cssfile: 'teachers', vivaSystem: vivaSystem, error: ''})
       } else {
         console.log('No document(s) found with defined "find" criteria!');
-        res.render('teachers', {title: 'Teachers', cssfile: 'teachers', vivaSystem: vivaSystem, error: ''})
+        res.render('teachers', {title: 'Teachers', cssfile: 'teachers', vivaSystem: 'empty_db', error: ''})
       }
           
     })

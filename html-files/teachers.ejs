@@ -26,6 +26,9 @@
                   
                 <table> 
                   <tr><th>ID Number</th><th>Marks</th></tr> 
+                  <% if(vivaSystem == 'empty_db'){ %>
+                    <tr id="student-data">Your inserted data will go here</tr>
+                    <% } else { %>
                   <% vivaSystem.forEach(viva => { %>
                     <tr id="student-data">
                       
@@ -36,6 +39,7 @@
                         
                           </tr>              
                       <% }) %>  
+                      <% } %>
                     </table>
               </div>
               <script type="text/javascript" src="/axios.min.js"></script>
