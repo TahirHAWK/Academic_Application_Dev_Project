@@ -19,6 +19,8 @@ let formIdMarks = document.getElementById('marks')
 
 let studentData = document.getElementById('student-data')
 
+let studentTable = document.getElementById('student-table')
+
 
 
 // functions for automated email 
@@ -87,11 +89,21 @@ formTeacherMarks.addEventListener('submit', function(event){
     axios.post('/teachers-submit', {idnumber: formIdSubmit.value, marks: formIdMarks.value, time: ExactTime}).then(function(response){
         console.log(response.data)
         if(response.data){
-            document.getElementById('student-data').insertAdjacentHTML('beforebegin', studentDataTemplate(response.data))
-            // must use the full code instead of studentData variable, it cannot find the parent
-            formIdSubmit.value = ''
-            formIdMarks.value = ''
-            formIdSubmit.focus()
+            console.log(studentTable, !studentTable.contains(document.getElementById('student-data')))
+            if(studentTable.contains(document.getElementById('student-data')) == false){
+                // this condition successfully executes, but the thing is, it doesn't contain any student-data id element, so we have to first make one and then set it to submitted response.
+                document.getElementById('student-table').insertAdjacentHTML('beforeend',studentDataTemplate(response.data))
+                formIdSubmit.value = ''
+                formIdMarks.value = ''
+                formIdSubmit.focus()
+            } else {
+
+                document.getElementById('student-data').insertAdjacentHTML('beforebegin', studentDataTemplate(response.data))
+                // must use the full code instead of studentData variable, it cannot find the parent
+                formIdSubmit.value = ''
+                formIdMarks.value = ''
+                formIdSubmit.focus()
+            }
 
 
         } else {
