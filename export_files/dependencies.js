@@ -9,6 +9,7 @@ let db
 // let connectionString = 'mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%20Compass&ssl=false'
 // for offline
 // always commit your changes to github after activating the online string and turning off the offline.
+// in this sentence 'mongodb://localhost:27017/?readPreference' in between the '/' and '?' write the database name that you want to connect to
 
 
 let connectionString = 'mongodb+srv://appdev:appdev@appdev.6ppvo.mongodb.net/AppDev?retryWrites=true&w=majority'
