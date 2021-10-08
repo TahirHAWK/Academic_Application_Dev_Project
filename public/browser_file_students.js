@@ -18,18 +18,21 @@ let requestStudentsPageData = function(){
     let ExactTime = datetime.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
     console.log(ExactTime)
     axios.post('/students-data', {time: ExactTime}).then(function(response){
-        // document. getElementById(“div_name”).innerText +=  “data” ; append method
-        let x =0
-        // for(x=0; x<=response.data.length; x++){
+       console.log(response.data)
+        if(response.data == 'empty_db'){
+            document.getElementById('student-data').innerHTML = "Database is now empty, you'll be notified if there's any data available."
+        } else{
+            console.log(response.data.map(function(data){
+                return studentDataTime(data)
+            }))
+                console.log('response : ', response.data.length)
+                document.getElementById('student-data').innerHTML = response.data.map(function(data){
+                   return studentDataTime(data)
+                }).join(`<br>`)
+        }
 
-        console.log(response.data.map(function(data){
-            return studentDataTime(data)
-        }))
-            console.log('response : ', response.data.length)
-            document.getElementById('student-data').innerHTML = response.data.map(function(data){
-               return studentDataTime(data)
-            }).join(`<br>`)
-        // }
+        
+        
     })
 }
 setInterval(requestStudentsPageData, 3*1000);
